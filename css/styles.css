@@ -1,0 +1,4724 @@
+/* リセットと基本設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* すべてのボタンと入力フィールドのoutlineを削除 */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ ProN W3', Hiragino Kaku Gothic ProN, Arial, 'メイリオ', Meiryo, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: #FFFFFF;
+    position: relative;
+}
+
+/* 画面共通スタイル */
+.screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+}
+
+/* ヘルプモード時の背景 */
+.screen.help-mode {
+    background: #2A2929;
+}
+
+.screen.help-mode .content-area {
+    background: #2A2929;
+}
+
+.screen.help-mode .datetime-bar {
+    background: #2A2929;
+    color: white;
+}
+
+.screen.help-mode .date {
+    color: white;
+}
+
+.screen.help-mode .time {
+    color: white;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* ヘルプモード用の背景 */
+.screen.help-mode {
+    background: #2A2929;
+}
+
+.screen.help-mode .content-area {
+    background: #2A2929;
+}
+
+/* ログイン画面の背景 */
+#login-screen {
+    background: #FFFFFF;
+}
+
+#login-screen .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ログインボックス */
+.login-box {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 50px 80px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    width: 900px;
+    max-width: 90%;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.main-logo {
+    width: 180px;
+    height: auto;
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #2C3E50;
+}
+
+#login-form .btn {
+    display: block;
+    margin: 20px auto 0;
+}
+
+/* フォームグループ */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2C3E50;
+}
+
+.input-field {
+    width: 100%;
+    padding: 18px 20px;
+    border: 3px solid #E0E0E0;
+    border-radius: 15px;
+    font-size: 18px;
+    transition: all 0.3s;
+    background: #FAFAFA;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #1E90FF;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.1);
+}
+
+/* ヘッダー - PDFデザインに準拠 */
+.header {
+    background: #3B5BDB;
+    color: white;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    position: relative;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.header-logo img {
+    height: 70px;
+    width: auto;
+}
+
+.store-name {
+    position: absolute;
+    right: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu-icon {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    cursor: pointer;
+    padding: 10px;
+    width: 60px;
+    text-align: center;
+}
+
+/* 日時表示バー - PDFデザインの黒い背景 */
+.datetime-bar {
+    background: #FFFFFF;
+    color: #333333;
+    padding: 20px;
+    text-align: center;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.date {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.time {
+    font-size: 50px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* コンテンツエリア - PDFデザインに準拠 */
+.content-area {
+    height: calc(100vh - 100px - 120px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background: #FFFFFF;
+}
+
+.content-box {
+    background: #FFFFFF;
+    padding: 40px 100px;
+    border-radius: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    width: 80%;
+    max-width: 1000px;
+    text-align: center;
+    position: relative;
+}
+
+/* アイコン */
+.icon-user, .icon-store {
+    font-size: 50px;
+    margin-bottom: 0;
+    margin-right: 15px;
+    color: #000000;
+    flex-shrink: 0;
+}
+
+/* 見出し */
+.content-box h1 {
+    font-size: 48px;
+    margin-bottom: 50px;
+    color: #2C3E50;
+    font-weight: bold;
+}
+
+.content-box h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #2C3E50;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* アイコンとh2を横並びにするためのコンテナ */
+.header-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.header-with-icon h2 {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.header-with-icon .icon-user,
+.header-with-icon .icon-store {
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+.employee-name {
+    font-size: 56px;
+    margin-bottom: 60px;
+    color: #2C3E50;
+    font-weight: bold;
+}
+
+.complete-message {
+    font-size: 42px;
+    margin-bottom: 40px;
+    color: #2C3E50;
+    font-weight: bold;
+}
+
+/* 入力フィールド（大） - PDFデザインに準拠 */
+.input-field-large {
+    width: 100%;
+    max-width: 1000px;
+    padding: 30px;
+    font-size: 32px;
+    border: 2px solid #CCCCCC;
+    border-radius: 25px;
+    margin: 30px auto;
+    text-align: center;
+    background: #FFFFFF;
+    transition: all 0.3s;
+}
+
+.input-field-large:focus {
+    outline: none;
+    border-color: #1E90FF;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.1);
+}
+
+/* セレクトフィールド */
+.select-field {
+    width: 100%;
+    max-width: 600px;
+    padding: 25px;
+    font-size: 24px;
+    border: 3px solid #E0E0E0;
+    border-radius: 20px;
+    margin: 30px auto;
+    background: #FFFFFF;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 30px;
+    padding-right: 60px;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: #FF0000;
+    font-size: 20px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+/* ステータステキスト */
+.status-text {
+    color: #FF0000;
+    font-size: 24px;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+/* ボタンスタイル - PDFデザインに準拠 */
+.btn {
+    padding: 20px 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    writing-mode: horizontal-tb;
+    white-space: nowrap;
+    outline: none; /* フォーカス時の黒枠線を削除 */
+}
+
+.btn:focus {
+    outline: none; /* フォーカス時の黒枠線を削除 */
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* ボタンサイズ */
+.btn-large {
+    padding: 35px 120px;
+    font-size: 40px;
+    border-radius: 20px;
+}
+
+.btn-medium {
+    padding: 25px 80px;
+    font-size: 28px;
+    border-radius: 15px;
+}
+
+/* ボタンカラー - PDFの正確な色 */
+.btn-primary {
+    background: #1E90FF;
+    color: white;
+}
+
+.btn-primary:active {
+    background: white;
+    color: #1E90FF;
+    border: 2px solid #1E90FF;
+}
+
+.btn-secondary {
+    background: #F0F0F0;
+    color: #333333;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.btn-secondary:hover {
+    background: #E0E0E0;
+}
+
+.btn-secondary:active {
+    background: white;
+    color: #333333;
+    border: 2px solid #333333;
+}
+
+/* 出勤ボタン - 緑 */
+.btn-green {
+    background: #00BE70;
+    color: white;
+}
+
+/* 休憩入ボタン - 青 */
+.btn-blue {
+    background: #27A7FA;
+    color: white;
+}
+
+/* 休憩終ボタン - 黄色 */
+.btn-yellow {
+    background: #FFD026;
+    color: #333333;
+}
+
+/* 退勤ボタン - 赤 */
+.btn-red {
+    background: #E22200;
+    color: white;
+}
+
+/* 通常ボタン - シアン */
+.btn-cyan {
+    background: #45E3FF;
+    color: #333333;
+}
+
+/* ヘルプボタン - ピンク */
+.btn-pink {
+    background: #E74D95;
+    color: white;
+}
+
+/* TOPへボタン - 白枠 */
+.btn-white {
+    background: white;
+    color: #FF5252;
+    border: 3px solid #FF5252;
+}
+
+.btn-white:hover {
+    background: #FFF5F5;
+}
+
+/* 戻るボタン */
+.btn-back {
+    background: transparent;
+    color: #FF5252;
+    border: 3px solid #FF5252;
+    padding: 15px 40px;
+    font-size: 22px;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+}
+
+.btn-back:hover {
+    background: #FF5252;
+    color: white;
+}
+
+/* ボタングループ */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.button-group-horizontal {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+/* 画像コンテナ */
+.image-container {
+    margin: 40px 0;
+}
+
+.motivation-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* トーストメッセージ */
+.toast-message {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    z-index: 10000;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -50px;
+        opacity: 0;
+    }
+    to {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+/* 無効化されたボタン */
+.btn:disabled,
+.btn.disabled {
+    background: #CCCCCC !important;
+    color: #999999 !important;
+    cursor: not-allowed !important;
+    opacity: 0.5;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .header {
+        height: 80px;
+    }
+    
+    .header-logo img {
+        height: 50px;
+    }
+    
+    .store-name {
+        right: 100px;
+        font-size: 20px;
+    }
+    
+    .menu-icon {
+        font-size: 35px;
+        right: 20px;
+    }
+    
+    .datetime-bar {
+        padding: 15px;
+    }
+    
+    .date {
+        font-size: 20px;
+    }
+    
+    .time {
+        font-size: 38px;
+        font-weight: 600;
+    }
+    
+    .content-box {
+        padding: 40px 30px;
+    }
+    
+    .content-box h1 {
+        font-size: 36px;
+    }
+    
+    .content-box h2 {
+        font-size: 28px;
+    }
+    
+    .employee-name {
+        font-size: 40px;
+    }
+    
+    .complete-message {
+        font-size: 32px;
+    }
+    
+    .btn {
+        padding: 18px 50px;
+        font-size: 20px;
+    }
+    
+    .btn-large {
+        padding: 28px 90px;
+        font-size: 32px;
+    }
+    
+    .btn-medium {
+        padding: 18px 40px;
+        font-size: 20px;
+    }
+    
+    .button-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    
+    .button-group-horizontal {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .input-field-large {
+        font-size: 24px;
+        padding: 20px;
+    }
+}
+
+/* 勤怠確認画面 */
+#attendance-check-screen .content-area {
+    height: calc(100vh - 100px);
+    padding: 0;
+}
+
+.attendance-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px 30px 30px;
+    background: #FFFFFF;
+    height: 100%;
+    overflow: hidden;
+}
+
+.attendance-header {
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.attendance-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-icon {
+    font-size: 32px;
+}
+
+.attendance-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2C3E50;
+    margin: 0;
+}
+
+.attendance-controls {
+    display: none;
+}
+
+.attendance-controls-wrapper {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.attendance-controls-row {
+    display: none;
+}
+
+.attendance-controls-row-1 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.attendance-controls-row-2 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.period-buttons-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-left: auto;
+}
+
+.attendance-controls-row-2 .btn-period:first-of-type {
+    margin-left: 0;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.radio-label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.filter-input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.calendar-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-label {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.calendar-section label {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.date-input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    width: 200px;
+    background: white;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+#show-calendar-btn {
+    font-size: 22px;
+    padding: 6px 12px;
+}
+
+#show-calendar-btn:active {
+    background: white;
+    color: #333333;
+    border: 2px solid #333333;
+}
+
+#display-btn {
+    background: #1E90FF;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+#display-btn:hover {
+    background: #1873CC;
+}
+
+#display-btn:active {
+    background: white;
+    color: #1E90FF;
+    border: 2px solid #1E90FF;
+}
+
+.period-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.period-buttons-inline {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-period {
+    padding: 10px 28px;
+    font-size: 22px;
+    font-weight: bold;
+    border: 3px solid #4CAF50;
+    background: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-period:hover {
+    background: #45a049;
+    border-color: #45a049;
+}
+
+.btn-period:active {
+    background: white;
+    color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-today {
+    background: white;
+    color: #4CAF50;
+}
+
+.btn-today:hover {
+    background: #f0f0f0;
+    color: #4CAF50;
+}
+
+.btn-today:active {
+    background: #4CAF50;
+    color: white;
+}
+
+/* テーブルスタイル */
+.attendance-table-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+.attendance-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.attendance-table thead {
+    background: #4CAF50;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.attendance-table th {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid white;
+    white-space: nowrap;
+}
+
+.attendance-table td {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #E0E0E0;
+    white-space: nowrap;
+}
+
+.attendance-table tbody tr:nth-child(odd) {
+    background: #E8F5E9;
+}
+
+.attendance-table tbody tr:nth-child(even) {
+    background: white;
+}
+
+.attendance-table tbody tr:hover {
+    background: #C8E6C9;
+}
+
+/* ハンバーガーメニュー */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+}
+
+.hamburger-menu.active {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-content {
+    background: white;
+    width: 300px;
+    height: 100%;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #3B5BDB;
+    color: white;
+}
+
+.menu-header h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 36px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list li {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.menu-list a {
+    display: block;
+    padding: 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background 0.2s;
+}
+
+.menu-list a:hover {
+    background: #F5F5F5;
+}
+
+/* カレンダーポップアップ */
+.calendar-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-popup.active {
+    display: flex;
+}
+
+.calendar-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h3 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.calendar-nav {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 5px 15px;
+    color: #333;
+}
+
+.calendar-nav:hover {
+    background: #F5F5F5;
+    border-radius: 50%;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+    background: #F5F5F5;
+    padding: 10px 5px;
+    border-radius: 8px;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #666;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.calendar-day:hover {
+    background: #E3F2FD;
+}
+
+.calendar-day.other-month {
+    color: #CCCCCC;
+}
+
+.calendar-day.selected {
+    background: #2196F3;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-day.today {
+    border: 2px solid #2196F3;
+}
+
+/* カスタムカレンダーポップアップ */
+.custom-calendar {
+    background: white;
+    border: 2px solid #00BE70;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width: 350px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.calendar-nav-btn {
+    background: #00BE70;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.calendar-nav-btn:hover {
+    background: #009959;
+    transform: scale(1.1);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+    padding: 8px 0;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s;
+    color: #333;
+}
+
+.calendar-day:hover:not(.prev-month):not(.next-month) {
+    background: #E0F7EC;
+    transform: scale(1.05);
+}
+
+.calendar-day.prev-month,
+.calendar-day.next-month {
+    color: #CCCCCC;
+    cursor: default;
+}
+
+.calendar-day.selected {
+    background: #00BE70;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-day.today:not(.selected) {
+    background: #E3F2FD;
+    font-weight: bold;
+}
+
+/* フィルター入力の無効化状態 */
+#filter-employee-id:disabled {
+    background: #f0f0f0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 期間ボタンのアクティブ状態 */
+.btn-period.active {
+    background: #00BE70 !important;
+    color: white !important;
+    font-weight: bold;
+}
+/* 管理者メニュー */
+.admin-container {
+    display: flex;
+    height: calc(100vh - 104px);
+    background: #F5F7FA;
+}
+
+/* 左サイドバー */
+.admin-sidebar {
+    width: 280px;
+    background: #E3EAF3;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 25px 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #D0D8E2;
+    font-size: 20px;
+    font-weight: 600;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+}
+
+.sidebar-item * {
+    pointer-events: none;
+}
+
+.sidebar-item:hover {
+    background: #D0D8E2;
+}
+
+.sidebar-item.active {
+    background: #2C3E50;
+    color: white;
+}
+
+.sidebar-item.active:hover {
+    background: #34495E;
+}
+
+.sidebar-icon {
+    font-size: 24px;
+}
+
+/* メインコンテンツ */
+.admin-content {
+    flex: 1;
+    padding: 40px 50px;
+    overflow-y: auto;
+    background: white;
+}
+
+.admin-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* メンバー管理トップ */
+.member-management-top {
+    max-width: 1200px;
+}
+
+.member-actions-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.btn-action {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-action.btn-add {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-action.btn-add:hover {
+    background: #45a049;
+}
+
+.btn-action.btn-edit {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-action.btn-edit:hover:not(:disabled) {
+    background: #0b7dda;
+}
+
+.btn-action.btn-delete {
+    background: #f44336;
+    color: white;
+}
+
+.btn-action.btn-delete:hover:not(:disabled) {
+    background: #da190b;
+}
+
+.btn-action:disabled {
+    background: #CCCCCC;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.member-select-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.member-select-section label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.member-select-dropdown {
+    padding: 10px 15px;
+    font-size: 18px;
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    min-width: 300px;
+    background: white;
+    cursor: pointer;
+}
+
+.member-list-section {
+    margin-top: 40px;
+}
+
+.member-list-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.member-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #333;
+}
+
+.member-list-table thead {
+    background: #F0F0F0;
+}
+
+.member-list-table th {
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #333;
+}
+
+.member-list-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.member-list-table tbody tr:nth-child(odd) {
+    background: #F9F9F9;
+}
+
+.member-list-table tbody tr:hover {
+    background: #E8F5E9;
+}
+
+.member-list-table tbody tr.selected {
+    background: #4CAF50;
+    color: white;
+    font-weight: 600;
+}
+
+.member-list-table tbody tr.selected:hover {
+    background: #45a049;
+}
+
+/* メンバーフォーム */
+.member-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-subtitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.form-instruction {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.form-group-large {
+    margin-bottom: 30px;
+}
+
+.form-group-large label {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.input-large {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 20px;
+    border: 2px solid #CCCCCC;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.btn-large {
+    padding: 18px 80px;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    margin: 20px 10px;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-large.btn-primary {
+    background: #00BCD4;
+    color: white;
+}
+
+.btn-large.btn-primary:hover {
+    background: #0097A7;
+}
+
+.btn-back-red {
+    background: white;
+    color: #E22200;
+    border: 3px solid #E22200;
+}
+
+.btn-back-red:hover {
+    background: #FFF5F5;
+}
+
+/* 確認画面 */
+.confirm-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.confirm-box {
+    background: #F5F5F5;
+    padding: 40px;
+    border-radius: 15px;
+    margin: 30px 0;
+}
+
+.confirm-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.confirm-item:last-child {
+    margin-bottom: 0;
+}
+
+.confirm-label {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.confirm-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.confirm-question {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 40px 0;
+}
+
+.btn-delete {
+    background: #E22200;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #C41E00;
+}
+
+/* 削除警告 */
+.delete-warning {
+    background: #FFF3CD;
+    border: 2px solid #FFC107;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.warning-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.warning-text {
+    font-size: 20px;
+    color: #856404;
+    font-weight: 600;
+}
+
+/* フォーム注釈 */
+.form-note {
+    font-size: 16px;
+    color: #999;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* メンバー編集画面の削除ボタン */
+.member-form-container .btn-delete {
+    margin-top: 20px;
+}
+
+/* 時給設定画面 */
+.wage-setting-form {
+    background: #F8F9FA;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+
+.wage-form-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    justify-content: center;
+}
+
+.wage-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wage-form-group label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.wage-select {
+    width: 280px;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+}
+
+.wage-select:focus {
+    outline: none;
+    border-color: #00BCD4;
+}
+
+.wage-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wage-input {
+    width: 200px;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    background: white;
+    text-align: right;
+}
+
+.wage-input:focus {
+    outline: none;
+    border-color: #00BCD4;
+}
+
+.wage-unit {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.btn-wage-set {
+    padding: 14px 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: #4CAF50;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 30px;
+}
+
+.btn-wage-set:hover {
+    background: #45A049;
+}
+
+.wage-list-section {
+    margin-top: 40px;
+}
+
+.wage-list-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.wage-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.wage-list-table thead {
+    background: #F5F5F5;
+}
+
+.wage-list-table th {
+    padding: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.wage-list-table tbody tr {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.wage-list-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.wage-list-table tbody tr:nth-child(even) {
+    background: #FAFAFA;
+}
+
+.wage-list-table td {
+    padding: 18px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+.wage-list-table .wage-amount {
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* 勤怠編集画面 */
+.edit-form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.edit-form-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.edit-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-form-group label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.edit-select {
+    width: 250px;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    background: white;
+}
+
+.edit-date-input {
+    width: 250px;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+}
+
+.btn-green {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-green:hover {
+    background: #45A049;
+}
+
+.edit-instruction {
+    font-size: 18px;
+    color: #666;
+    margin: 20px 0;
+}
+
+.edit-time-section {
+    background: #F5F5F5;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.time-row {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.time-group {
+    flex: 1;
+}
+
+.time-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.time-input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 20px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.btn-clear-small {
+    background: #E22200;
+    color: white;
+    padding: 4px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-clear-small:hover {
+    background: #C41E00;
+}
+
+.break-section {
+    margin-top: 30px;
+}
+
+.break-row {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.btn-add-break {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-add-break:hover {
+    background: #45A049;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.btn-back-outline {
+    background: white;
+    color: #E22200;
+    border: 3px solid #E22200;
+    padding: 14px 50px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-back-outline:hover {
+    background: #FFF5F5;
+}
+
+.btn-primary-large {
+    background: #00B0FF;
+    color: white;
+    border: none;
+    padding: 14px 60px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-primary-large:hover {
+    background: #0097CC;
+}
+
+.btn-clear-all {
+    background: #E22200;
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-clear-all:hover {
+    background: #C41E00;
+}
+
+/* 勤怠編集確認画面 */
+.edit-confirm-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.confirm-subtitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.confirm-edit-table {
+    width: 100%;
+    background: #F5F5F5;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 30px 0;
+}
+
+.confirm-edit-table tr {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.confirm-edit-table tr:last-child {
+    border-bottom: none;
+}
+
+.confirm-edit-table th {
+    background: #E8E8E8;
+    padding: 20px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+    width: 150px;
+}
+
+.confirm-edit-table td {
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.confirm-question {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 40px 0;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.confirm-buttons-center {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn-back-outline-large {
+    background: white;
+    color: #E22200;
+    border: 3px solid #E22200;
+    padding: 16px 60px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-back-outline-large:hover {
+    background: #FFF5F5;
+}
+
+.btn-decision-large {
+    background: #00B0FF;
+    color: white;
+    border: none;
+    padding: 16px 80px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-decision-large:hover {
+    background: #0097CC;
+}
+
+/* 勤怠編集ボタン（勤怠確認画面） */
+.btn-edit-attendance {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.btn-edit-attendance:hover {
+    background: #45A049;
+}
+
+/* 新しい勤怠編集画面スタイル */
+.edit-form-new {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.edit-row-group {
+    background: #F8F9FA;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.edit-row-inner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.edit-row-inner:last-child {
+    margin-bottom: 0;
+}
+
+.edit-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #F8F9FA;
+    border-radius: 8px;
+}
+
+.edit-label {
+    min-width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.edit-input-select {
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 6px;
+    background: white;
+}
+
+.edit-input-date {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 6px;
+}
+
+.btn-display {
+    background: #00B0FF;
+    color: white;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-display:hover {
+    background: #0097CC;
+}
+
+.btn-load-record {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-load-record:hover {
+    background: #45A049;
+}
+
+.time-input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.time-input-small {
+    width: 60px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #CCC;
+    border-radius: 6px;
+}
+
+.time-input-small::placeholder {
+    color: #999;
+}
+
+.time-separator {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 10px;
+}
+
+.btn-delete-row {
+    background: #E22200;
+    color: white;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.btn-delete-row:hover {
+    background: #C41E00;
+}
+
+.edit-buttons-new {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 150px;
+    margin-top: 40px;
+    padding: 0 20px;
+    flex-wrap: nowrap;
+}
+
+.edit-buttons-right {
+    display: flex;
+    gap: 40px;
+}
+
+/* 勤怠編集画面の左下固定戻るボタン */
+.btn-back-fixed {
+    background: transparent;
+    color: #FF5252;
+    border: 3px solid #FF5252;
+    padding: 15px 40px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 30px;
+    left: 330px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.btn-back-fixed:hover {
+    background: #FF5252;
+    color: white;
+}
+
+.btn-return {
+    background: white;
+    color: #E22200;
+    border: 3px solid #E22200;
+    padding: 14px 50px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-return:hover {
+    background: #FFF5F5;
+}
+
+.btn-save {
+    background: #00B0FF;
+    color: white;
+    border: none;
+    padding: 14px 70px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 260px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-save:hover {
+    background: #0097CC;
+}
+
+.btn-delete-attendance {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 14px 70px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-delete-attendance:hover {
+    background: #c82333;
+}
+
+/* 数字のみ入力 */
+.time-input-small::-webkit-inner-spin-button,
+.time-input-small::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.time-input-small[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* 管理者用勤怠確認・ヘルプ確認画面 */
+.admin-check-controls {
+    background: #F8F9FA;
+    padding: 25px 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.control-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-left: 15px;
+}
+
+.control-row .control-label:first-child {
+    margin-left: 0;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.date-select-input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 6px;
+    background: white;
+}
+
+.date-select-large {
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #999;
+    border-radius: 8px;
+    min-width: 180px;
+}
+
+.date-select-xlarge {
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: 600;
+    border: 3px solid #666;
+    border-radius: 10px;
+    min-width: 220px;
+}
+
+.btn-calendar {
+    background: white;
+    border: 2px solid #CCC;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-calendar:hover {
+    background: #F5F5F5;
+}
+
+.btn-show {
+    background: #00B0FF;
+    color: white;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-show:hover {
+    background: #0097CC;
+}
+
+.store-select {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.btn-edit-attendance-admin {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.btn-edit-attendance-admin:hover {
+    background: #45A049;
+}
+
+.employee-list-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.admin-check-table-container {
+    overflow-x: auto;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+}
+
+.admin-check-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.admin-check-table thead {
+    background: #4CAF50;
+    color: white;
+}
+
+.admin-check-table th {
+    padding: 15px 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-check-table th:last-child {
+    border-right: none;
+}
+
+.admin-check-table tbody tr {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.admin-check-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.admin-check-table tbody tr:nth-child(even) {
+    background: #F9F9F9;
+}
+
+.admin-check-table tbody tr.highlight-row {
+    background: #E8F5E9;
+}
+
+.admin-check-table td {
+    padding: 15px 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    border-right: 1px solid #E0E0E0;
+}
+
+.admin-check-table td:last-child {
+    border-right: none;
+}
+
+.admin-check-table tbody tr:hover {
+    background: #F0F7FF;
+}
+
+.admin-check-table tbody tr.highlight-row:hover {
+    background: #D4EDD6;
+}
+
+/* Excel出力画面 */
+.excel-output-container {
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.excel-form-section {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.excel-form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 20px;
+}
+
+.excel-label {
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 160px;
+}
+
+.excel-file-input {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    background: #F5F5F5;
+}
+
+.btn-select-file {
+    background: #2196F3;
+    color: white;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-select-file:hover {
+    background: #0b7dda;
+}
+
+.store-select-excel {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    min-width: 250px;
+    background: white;
+}
+
+.btn-calendar-icon {
+    background: white;
+    border: 2px solid #CCC;
+    padding: 12px 18px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-calendar-icon:hover {
+    background: #F5F5F5;
+}
+
+.excel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.btn-excel-execute {
+    background: #4CAF50;
+    color: white;
+    padding: 18px 80px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-excel-execute:hover {
+    background: #45a049;
+}
+
+.btn-excel-clear {
+    background: #f44336;
+    color: white;
+    padding: 18px 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-excel-clear:hover {
+    background: #da190b;
+}
+
+/* 管理者パスワード認証画面 */
+.content-area-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px);
+    background: #FFFFFF;
+    padding: 40px 20px;
+}
+
+.admin-password-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.admin-password-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 60px;
+}
+
+.password-box {
+    background: #F5F5F5;
+    border-radius: 30px;
+    padding: 80px 100px;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.password-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.key-icon {
+    font-size: 60px;
+}
+
+.password-instruction {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333333;
+    margin: 0;
+}
+
+.error-message-password {
+    font-size: 28px;
+    color: #E22200;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.password-input-field {
+    width: 100%;
+    max-width: 1000px;
+    padding: 30px 40px;
+    font-size: 32px;
+    border: 3px solid #CCCCCC;
+    border-radius: 20px;
+    background: #FFFFFF;
+    margin: 0 auto 50px;
+    display: block;
+    text-align: center;
+    letter-spacing: 8px;
+}
+
+.password-input-field:focus {
+    border-color: #3B5BDB;
+    background: #FFFFFF;
+}
+
+.btn-back-password {
+    background: white;
+    color: #E22200;
+    border: 3px solid #E22200;
+    padding: 18px 80px;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-back-password:hover {
+    background: #E22200;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(226, 34, 0, 0.3);
+}
+
+/* ========================================
+   レスポンシブデザイン対応
+   ======================================== */
+
+/* ノートPC (1600px以下) 用 - 軽微な調整 */
+@media screen and (max-width: 1600px) {
+    /* ヘッダー */
+    .header {
+        height: 90px;
+    }
+    
+    .header-logo img {
+        height: 60px;
+    }
+    
+    .store-name {
+        font-size: 22px;
+        right: 110px;
+    }
+    
+    .menu-icon {
+        font-size: 36px;
+        width: 55px;
+    }
+    
+    /* 日時表示 */
+    .datetime-bar {
+        padding: 18px;
+    }
+    
+    .date {
+        font-size: 26px;
+    }
+    
+    .time {
+        font-size: 46px;
+        letter-spacing: 4px;
+    }
+    
+    /* コンテンツエリア */
+    .content-area {
+        height: calc(100vh - 90px - 110px);
+        padding: 35px 20px;
+    }
+    
+    .content-box {
+        padding: 35px 90px;
+    }
+    
+    .content-box h1 {
+        font-size: 44px;
+        margin-bottom: 45px;
+    }
+    
+    .content-box h2 {
+        font-size: 33px;
+    }
+    
+    .employee-name {
+        font-size: 52px;
+        margin-bottom: 55px;
+    }
+    
+    .complete-message {
+        font-size: 39px;
+    }
+    
+    /* アイコン */
+    .icon-user, .icon-store {
+        font-size: 46px;
+    }
+    
+    /* 入力フィールド */
+    .input-field-large {
+        padding: 28px;
+        font-size: 30px;
+    }
+    
+    /* ボタン */
+    .btn {
+        padding: 18px 55px;
+        font-size: 22px;
+    }
+    
+    .btn-large {
+        padding: 32px 110px;
+        font-size: 37px;
+    }
+    
+    .btn-medium {
+        padding: 23px 75px;
+        font-size: 26px;
+    }
+    
+    /* ログインボックス */
+    .login-box {
+        padding: 45px 75px;
+        width: 850px;
+    }
+    
+    .login-box h2 {
+        font-size: 30px;
+    }
+    
+    .main-logo {
+        width: 170px;
+    }
+    
+    /* 管理者パスワード画面 */
+    .admin-password-title {
+        font-size: 44px;
+    }
+    
+    .password-box {
+        padding: 75px 95px;
+    }
+    
+    .password-instruction {
+        font-size: 33px;
+    }
+    
+    .password-input-field {
+        padding: 28px 38px;
+        font-size: 30px;
+    }
+}
+
+/* ノートPC (1440px以下) 用 - 中程度の調整 */
+@media screen and (max-width: 1440px) {
+    /* ヘッダー */
+    .header {
+        height: 80px;
+    }
+    
+    .header-logo img {
+        height: 55px;
+    }
+    
+    .store-name {
+        font-size: 20px;
+        right: 100px;
+    }
+    
+    .menu-icon {
+        font-size: 34px;
+        width: 50px;
+    }
+    
+    /* 日時表示 */
+    .datetime-bar {
+        padding: 16px;
+    }
+    
+    .date {
+        font-size: 24px;
+    }
+    
+    .time {
+        font-size: 42px;
+        letter-spacing: 3px;
+    }
+    
+    /* コンテンツエリア */
+    .content-area {
+        height: calc(100vh - 80px - 100px);
+        padding: 30px 20px;
+    }
+    
+    .content-box {
+        padding: 30px 80px;
+    }
+    
+    .content-box h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+    
+    .content-box h2 {
+        font-size: 30px;
+    }
+    
+    .employee-name {
+        font-size: 48px;
+        margin-bottom: 50px;
+    }
+    
+    .complete-message {
+        font-size: 36px;
+    }
+    
+    /* アイコン */
+    .icon-user, .icon-store {
+        font-size: 42px;
+    }
+    
+    /* 入力フィールド */
+    .input-field-large {
+        padding: 25px;
+        font-size: 28px;
+    }
+    
+    .select-field {
+        padding: 22px;
+        font-size: 22px;
+    }
+    
+    /* ボタン */
+    .btn {
+        padding: 16px 50px;
+        font-size: 20px;
+    }
+    
+    .btn-large {
+        padding: 30px 100px;
+        font-size: 34px;
+    }
+    
+    .btn-medium {
+        padding: 20px 70px;
+        font-size: 24px;
+    }
+    
+    /* ログインボックス */
+    .login-box {
+        padding: 40px 70px;
+        width: 800px;
+    }
+    
+    .login-box h2 {
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+    
+    .main-logo {
+        width: 160px;
+    }
+    
+    .form-group label {
+        font-size: 17px;
+    }
+    
+    .input-field {
+        padding: 16px 18px;
+        font-size: 17px;
+    }
+    
+    /* 管理者パスワード画面 */
+    .admin-password-title {
+        font-size: 40px;
+        margin-bottom: 55px;
+    }
+    
+    .password-box {
+        padding: 70px 90px;
+    }
+    
+    .key-icon {
+        font-size: 55px;
+    }
+    
+    .password-instruction {
+        font-size: 30px;
+    }
+    
+    .password-input-field {
+        padding: 26px 36px;
+        font-size: 28px;
+    }
+    
+    .btn-back-password {
+        padding: 16px 75px;
+        font-size: 26px;
+    }
+    
+    /* 管理画面 */
+    .admin-sidebar {
+        width: 230px;
+    }
+    
+    .sidebar-item {
+        padding: 18px 20px;
+        font-size: 16px;
+    }
+    
+    .sidebar-icon {
+        font-size: 22px;
+    }
+    
+    .admin-title {
+        font-size: 26px;
+        margin-bottom: 28px;
+    }
+    
+    .title-icon {
+        font-size: 26px;
+    }
+}
+
+/* ノートPC (1366px以下) 用 - より大きな調整 */
+@media screen and (max-width: 1366px) {
+    /* ヘッダー */
+    .header {
+        height: 75px;
+    }
+    
+    .header-logo {
+        padding-left: 25px;
+    }
+    
+    .header-logo img {
+        height: 50px;
+    }
+    
+    .store-name {
+        font-size: 19px;
+        right: 95px;
+    }
+    
+    .menu-icon {
+        font-size: 32px;
+        right: 25px;
+        width: 48px;
+    }
+    
+    /* 日時表示 */
+    .datetime-bar {
+        padding: 15px;
+    }
+    
+    .date {
+        font-size: 22px;
+        letter-spacing: 1.5px;
+    }
+    
+    .time {
+        font-size: 38px;
+        letter-spacing: 3px;
+    }
+    
+    /* コンテンツエリア */
+    .content-area {
+        height: calc(100vh - 75px - 95px);
+        padding: 25px 15px;
+    }
+    
+    .content-box {
+        padding: 28px 70px;
+        width: 85%;
+    }
+    
+    .content-box h1 {
+        font-size: 36px;
+        margin-bottom: 35px;
+    }
+    
+    .content-box h2 {
+        font-size: 27px;
+        margin-bottom: 25px;
+    }
+    
+    .employee-name {
+        font-size: 44px;
+        margin-bottom: 45px;
+    }
+    
+    .complete-message {
+        font-size: 33px;
+        margin-bottom: 35px;
+    }
+    
+    /* アイコン */
+    .icon-user, .icon-store {
+        font-size: 38px;
+        margin-right: 12px;
+    }
+    
+    /* 入力フィールド */
+    .input-field-large {
+        padding: 23px;
+        font-size: 26px;
+        margin: 25px auto;
+    }
+    
+    .select-field {
+        padding: 20px;
+        font-size: 20px;
+        margin: 25px auto;
+    }
+    
+    /* ボタン */
+    .btn {
+        padding: 15px 45px;
+        font-size: 19px;
+        margin: 8px;
+    }
+    
+    .btn-large {
+        padding: 28px 90px;
+        font-size: 32px;
+    }
+    
+    .btn-medium {
+        padding: 18px 65px;
+        font-size: 22px;
+    }
+    
+    .btn-back {
+        padding: 13px 40px;
+        font-size: 18px;
+    }
+    
+    /* ログインボックス */
+    .login-box {
+        padding: 35px 60px;
+        width: 750px;
+    }
+    
+    .login-box h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+    
+    .main-logo {
+        width: 150px;
+    }
+    
+    .logo-container {
+        margin-bottom: 35px;
+    }
+    
+    .form-group {
+        margin-bottom: 22px;
+    }
+    
+    .form-group label {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .input-field {
+        padding: 15px 17px;
+        font-size: 16px;
+    }
+    
+    /* エラーメッセージ */
+    .error-message {
+        font-size: 18px;
+    }
+    
+    .status-text {
+        font-size: 22px;
+    }
+    
+    /* 画像 */
+    .motivation-image {
+        max-width: 350px;
+    }
+    
+    /* 管理者パスワード画面 */
+    .content-area-center {
+        min-height: calc(100vh - 165px);
+        padding: 35px 20px;
+    }
+    
+    .admin-password-title {
+        font-size: 38px;
+        margin-bottom: 50px;
+    }
+    
+    .password-box {
+        padding: 60px 80px;
+        max-width: 1000px;
+    }
+    
+    .key-icon {
+        font-size: 50px;
+    }
+    
+    .password-instruction {
+        font-size: 28px;
+    }
+    
+    .error-message-password {
+        font-size: 26px;
+    }
+    
+    .password-input-field {
+        padding: 24px 34px;
+        font-size: 26px;
+        margin-bottom: 45px;
+    }
+    
+    .btn-back-password {
+        padding: 15px 70px;
+        font-size: 24px;
+    }
+    
+    /* 管理画面 */
+    .admin-sidebar {
+        width: 220px;
+    }
+    
+    .sidebar-item {
+        padding: 16px 18px;
+        font-size: 15px;
+    }
+    
+    .sidebar-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+    
+    .admin-content {
+        padding: 30px;
+    }
+    
+    .admin-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    
+    .title-icon {
+        font-size: 24px;
+    }
+    
+    /* 管理画面のテーブル */
+    .admin-check-table th {
+        padding: 13px 8px;
+        font-size: 14px;
+    }
+    
+    .admin-check-table td {
+        padding: 13px 8px;
+        font-size: 13px;
+    }
+    
+    /* 勤怠編集画面 */
+    .edit-table-container {
+        padding: 25px;
+    }
+    
+    .edit-table th {
+        padding: 13px 8px;
+        font-size: 15px;
+    }
+    
+    .edit-table td {
+        padding: 13px 8px;
+    }
+    
+    .time-input-small {
+        width: 55px;
+        padding: 8px;
+        font-size: 17px;
+    }
+    
+    .btn-delete-row {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+    }
+    
+    .btn-return, .btn-save {
+        padding: 12px 60px;
+        font-size: 17px;
+    }
+}
+
+/* 小型ノートPC (1280px以下) 用 */
+@media screen and (max-width: 1280px) {
+    /* ヘッダー */
+    .header {
+        height: 70px;
+    }
+    
+    .header-logo img {
+        height: 45px;
+    }
+    
+    .store-name {
+        font-size: 18px;
+        right: 90px;
+    }
+    
+    .menu-icon {
+        font-size: 30px;
+        right: 22px;
+        width: 45px;
+    }
+    
+    /* 日時表示 */
+    .datetime-bar {
+        padding: 13px;
+    }
+    
+    .date {
+        font-size: 20px;
+    }
+    
+    .time {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+    
+    /* コンテンツエリア */
+    .content-area {
+        height: calc(100vh - 70px - 90px);
+        padding: 22px 15px;
+    }
+    
+    .content-box {
+        padding: 25px 60px;
+        width: 88%;
+    }
+    
+    .content-box h1 {
+        font-size: 34px;
+        margin-bottom: 32px;
+    }
+    
+    .content-box h2 {
+        font-size: 25px;
+        margin-bottom: 22px;
+    }
+    
+    .employee-name {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+    
+    .complete-message {
+        font-size: 30px;
+        margin-bottom: 32px;
+    }
+    
+    /* アイコン */
+    .icon-user, .icon-store {
+        font-size: 36px;
+        margin-right: 10px;
+    }
+    
+    /* 入力フィールド */
+    .input-field-large {
+        padding: 20px;
+        font-size: 24px;
+        margin: 22px auto;
+    }
+    
+    .select-field {
+        padding: 18px;
+        font-size: 19px;
+        margin: 22px auto;
+    }
+    
+    /* ボタン */
+    .btn {
+        padding: 14px 40px;
+        font-size: 18px;
+        margin: 7px;
+    }
+    
+    .btn-large {
+        padding: 26px 80px;
+        font-size: 30px;
+    }
+    
+    .btn-medium {
+        padding: 17px 60px;
+        font-size: 21px;
+    }
+    
+    .btn-back {
+        padding: 12px 38px;
+        font-size: 17px;
+    }
+    
+    /* ログインボックス */
+    .login-box {
+        padding: 32px 55px;
+        width: 700px;
+    }
+    
+    .login-box h2 {
+        font-size: 24px;
+        margin-bottom: 28px;
+    }
+    
+    .main-logo {
+        width: 140px;
+    }
+    
+    .logo-container {
+        margin-bottom: 32px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        font-size: 15px;
+    }
+    
+    .input-field {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+    
+    /* 管理者パスワード画面 */
+    .admin-password-title {
+        font-size: 36px;
+        margin-bottom: 45px;
+    }
+    
+    .password-box {
+        padding: 55px 75px;
+        max-width: 950px;
+    }
+    
+    .key-icon {
+        font-size: 48px;
+    }
+    
+    .password-instruction {
+        font-size: 26px;
+    }
+    
+    .error-message-password {
+        font-size: 24px;
+    }
+    
+    .password-input-field {
+        padding: 22px 32px;
+        font-size: 24px;
+        margin-bottom: 42px;
+    }
+    
+    .btn-back-password {
+        padding: 14px 65px;
+        font-size: 22px;
+    }
+    
+    /* 管理画面 */
+    .admin-sidebar {
+        width: 210px;
+    }
+    
+    .sidebar-item {
+        padding: 15px 16px;
+        font-size: 14px;
+    }
+    
+    .sidebar-icon {
+        font-size: 19px;
+        margin-right: 9px;
+    }
+    
+    .admin-content {
+        padding: 28px;
+    }
+    
+    .admin-title {
+        font-size: 22px;
+        margin-bottom: 23px;
+    }
+    
+    .title-icon {
+        font-size: 22px;
+    }
+}
+
+/* ====================================
+   シフト管理・確認画面
+   ==================================== */
+
+/* シフト画面コンテンツ */
+.shift-content {
+    padding: 30px;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.shift-admin-content {
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* シフトヘッダー */
+.shift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.shift-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shift-title h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 月ナビゲーション */
+.shift-month-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.shift-nav-btn {
+    background: #3B5BDB;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.shift-nav-btn:hover {
+    background: #2948b8;
+}
+
+.shift-month-display {
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* シフトテーブルコンテナ */
+.shift-table-container {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+/* シフトテーブル */
+.shift-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.shift-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.shift-table th,
+.shift-table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* 日付列ヘッダー */
+.shift-date-header {
+    background: #F5F5F5;
+    padding: 12px 8px;
+    font-weight: bold;
+    font-size: 16px;
+    min-width: 80px;
+    width: 80px;
+}
+
+/* 従業員名ヘッダー */
+.shift-employee-header {
+    background: #F5F5F5;
+    padding: 8px 2px;
+    font-weight: bold;
+    font-size: clamp(8px, 1vw, 14px);
+    min-width: 40px;
+    white-space: nowrap;
+}
+
+/* 日付セル */
+.shift-date-cell {
+    background: #F9F9F9;
+    padding: 10px 5px;
+    font-weight: bold;
+    min-width: 80px;
+    width: 80px;
+}
+
+.shift-day {
+    display: block;
+    font-size: 18px;
+    color: #333;
+}
+
+.shift-weekday {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+.shift-weekday.sunday {
+    color: #E22200;
+}
+
+.shift-weekday.saturday {
+    color: #3B5BDB;
+}
+
+/* 曜日による行の色分け */
+.shift-row-sunday .shift-date-cell {
+    background: #FFF5F5;
+}
+
+.shift-row-saturday .shift-date-cell {
+    background: #F5F8FF;
+}
+
+/* シフトセル */
+.shift-cell {
+    padding: 8px 4px;
+    min-height: 60px;
+    min-width: 60px;
+    cursor: default;
+    background: white;
+    transition: background 0.2s;
+}
+
+#shift-management-table-body .shift-cell {
+    cursor: pointer;
+}
+
+#shift-management-table-body .shift-cell:hover {
+    background: #E8F4FD;
+}
+
+/* 勤務ありのセル */
+.shift-working {
+    background: #FAFAFA;
+}
+
+.shift-circle {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1;
+}
+
+.shift-time {
+    display: block;
+    font-size: 11px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 2px;
+    line-height: 1.3;
+}
+
+.shift-note {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* シフト編集モーダル */
+.shift-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.shift-modal.active {
+    display: flex;
+}
+
+.shift-modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.shift-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.shift-modal-header h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.shift-modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.shift-modal-close:hover {
+    color: #333;
+}
+
+.shift-modal-body {
+    padding: 25px;
+}
+
+.shift-modal-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #F5F5F5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.shift-modal-employee {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.shift-modal-date {
+    font-size: 16px;
+    color: #666;
+}
+
+.shift-form-group {
+    margin-bottom: 20px;
+}
+
+.shift-form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.shift-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.shift-checkbox-label input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.shift-checkbox-label span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.shift-time-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shift-time-input {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 130px;
+}
+
+.shift-time-input:disabled {
+    background: #F5F5F5;
+    color: #999;
+}
+
+.shift-time-separator {
+    font-size: 18px;
+    color: #666;
+}
+
+.shift-note-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+.shift-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 25px;
+    border-top: 1px solid #eee;
+}
+
+.btn-delete-shift {
+    background: #E22200;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.btn-delete-shift:hover {
+    background: #C41E00;
+}
+
+.btn-cancel-shift {
+    background: #F5F5F5;
+    color: #666;
+    border: none;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-cancel-shift:hover {
+    background: #E8E8E8;
+}
+
+.btn-save-shift {
+    background: #00B0FF;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-save-shift:hover {
+    background: #0097CC;
+}
+
+/* シフト画面のレスポンシブ対応 */
+@media (max-width: 1400px) {
+    .shift-employee-header {
+        font-size: clamp(7px, 0.9vw, 11px);
+        padding: 6px 2px;
+        min-width: 35px;
+    }
+    
+    .shift-cell {
+        min-width: 35px;
+        width: auto;
+    }
+}
+
+@media (max-width: 1200px) {
+    .shift-employee-header {
+        font-size: clamp(6px, 0.85vw, 10px);
+        padding: 5px 1px;
+        min-width: 30px;
+    }
+    
+    .shift-cell {
+        min-width: 30px;
+        width: auto;
+    }
+    
+    .shift-circle {
+        font-size: 24px;
+    }
+    
+    .shift-time {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .shift-content {
+        padding: 15px;
+    }
+    
+    .shift-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .shift-title h2 {
+        font-size: 20px;
+    }
+    
+    .shift-employee-header {
+        font-size: clamp(6px, 1.5vw, 9px);
+        padding: 4px 1px;
+        min-width: 25px;
+    }
+    
+    .shift-cell {
+        min-width: 25px;
+        width: auto;
+        font-size: 11px;
+    }
+    
+    .shift-date-header,
+    .shift-date-cell {
+        min-width: 50px;
+        width: 50px;
+    }
+    
+    .shift-day {
+        font-size: 14px;
+    }
+    
+    .shift-weekday {
+        font-size: 11px;
+    }
+    
+    .shift-circle {
+        font-size: 18px;
+    }
+    
+    .shift-time {
+        font-size: 8px;
+    }
+    
+    .shift-modal-content {
+        width: 95%;
+    }
+}
+
+/* ID入力グループ（自動生成用） */
+.id-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.id-input-group .input-large {
+    flex: 1;
+}
+
+.input-readonly {
+    background-color: #F5F5F5;
+    color: #333;
+    cursor: default;
+}
+
+.btn-regenerate {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-regenerate:hover {
+    background: #45A049;
+}
+
+
+/* 管理者用店舗選択 */
+.admin-store-select-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: #E8F5E9;
+    border-bottom: 1px solid #C8E6C9;
+}
+
+.admin-store-select-container label {
+    font-weight: bold;
+    color: #2E7D32;
+}
+
+.admin-store-filter {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background: white;
+    min-width: 200px;
+}
+
+.admin-store-filter:focus {
+    outline: none;
+    border-color: #2E7D32;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+
+/* 管理者用店舗選択（共通） */
+.admin-store-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: #E8F5E9;
+    border-bottom: 1px solid #C8E6C9;
+}
+
+.admin-store-select-wrapper label {
+    font-weight: bold;
+    color: #2E7D32;
+}
+
+.admin-store-filter-common {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background: white;
+    min-width: 200px;
+}
+
+.admin-store-filter-common:focus {
+    outline: none;
+    border-color: #2E7D32;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* ==========================================
+   初回インストール画面
+   ========================================== */
+.install-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: installFadeIn 0.5s ease-out;
+}
+
+@keyframes installFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.install-container {
+    text-align: center;
+    padding: 40px;
+    max-width: 450px;
+    width: 90%;
+}
+
+.install-logo {
+    margin-bottom: 40px;
+    animation: installLogoFloat 3s ease-in-out infinite;
+}
+
+@keyframes installLogoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.install-logo-img {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(76, 175, 80, 0.4));
+}
+
+.install-message {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.install-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: installIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes installIconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.install-message h2 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.loading-dots span {
+    animation: loadingDot 1.4s infinite;
+    opacity: 0;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loadingDot {
+    0%, 20% { opacity: 0; }
+    40% { opacity: 1; }
+    60%, 100% { opacity: 0; }
+}
+
+.install-subtitle {
+    color: #a0a0a0;
+    font-size: 14px;
+    margin: 0;
+}
+
+.install-progress-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.install-progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.install-status {
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.install-percent {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.install-progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.install-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A, #4CAF50);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    animation: installProgressShine 1.5s linear infinite;
+}
+
+@keyframes installProgressShine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.install-detail {
+    color: #808080;
+    font-size: 12px;
+    min-height: 18px;
+}
+
+/* インストール完了時のアニメーション */
+.install-overlay.fade-out {
+    animation: installFadeOut 0.8s ease-in forwards;
+}
+
+@keyframes installFadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
+
+.install-complete .install-icon {
+    animation: installCompleteIcon 0.5s ease-out;
+}
+
+@keyframes installCompleteIcon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+
+/* ==========================================
+   契約管理スタイル
+   ========================================== */
+
+.contract-management-container {
+    padding: 20px;
+}
+
+/* タブメニュー */
+.contract-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.contract-tab {
+    padding: 10px 20px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.contract-tab:hover {
+    background: #e0e0e0;
+}
+
+.contract-tab.active {
+    background: #333;
+    color: white;
+}
+
+/* 契約一覧 */
+.contract-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.contract-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.contract-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.contract-list-table th,
+.contract-list-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.contract-list-table th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.contract-list-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+/* ステータスバッジ */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-expired {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-cancelled {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* 契約フォーム */
+.contract-form {
+    max-width: 700px;
+}
+
+.form-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-row input:focus {
+    border-color: #333;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+.required {
+    color: #e74c3c;
+}
+
+/* プラン選択 */
+.plan-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.plan-option {
+    cursor: pointer;
+}
+
+.plan-option input[type="radio"] {
+    display: none;
+}
+
+.plan-card {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.plan-option input[type="radio"]:checked + .plan-card {
+    border-color: #333;
+    background: #f8f8f8;
+}
+
+.plan-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.plan-price {
+    font-size: 13px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* 同意チェックボックス */
+.contract-preview-box {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.agreement-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.agreement-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* フォームアクション */
+.form-actions {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.btn-large {
+    padding: 15px 50px;
+    font-size: 16px;
+}
+
+/* 小さいボタン */
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 0 3px;
+}
+
+.btn-view {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-pdf {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* モーダル */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.modal-large {
+    max-width: 900px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #333;
+    color: white;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: calc(90vh - 130px);
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .plan-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .contract-list-table {
+        font-size: 12px;
+    }
+    
+    .contract-list-table th,
+    .contract-list-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* ===========================
+   シフト管理 - 並び順変更
+   =========================== */
+
+/* ヘッダーのドラッグ&ドロップ */
+.draggable-header {
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.draggable-header:hover {
+    background: #e8f4fd;
+}
+
+.draggable-header:active {
+    cursor: grabbing;
+}
+
+.draggable-header.dragging-header {
+    opacity: 0.5;
+}
+
+.draggable-header.drag-over-header {
+    background: #c8e6c9;
+    border-left: 3px solid #4CAF50;
+    border-right: 3px solid #4CAF50;
+}
+
+/* ヘッダーのレイアウト調整 */
+.shift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 並び順変更モーダル */
+.employee-order-modal-content {
+    max-width: 95vw;
+    width: 1400px;
+    max-height: 90vh;
+}
+
+.employee-order-description {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.employee-order-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.employee-order-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: grab;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.employee-order-item:hover {
+    background: #e8f4fd;
+    border-color: #00B0FF;
+    box-shadow: 0 2px 8px rgba(0, 176, 255, 0.2);
+}
+
+.employee-order-item:active {
+    cursor: grabbing;
+}
+
+.employee-order-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.employee-order-item.drag-over {
+    border-color: #4CAF50;
+    background: #e8f5e9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.employee-order-drag-handle {
+    font-size: 24px;
+    color: #999;
+    cursor: grab;
+    user-select: none;
+}
+
+.employee-order-drag-handle:active {
+    cursor: grabbing;
+}
+
+.employee-order-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.employee-order-number {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+    min-width: 40px;
+}
+
+.employee-order-id {
+    font-size: 16px;
+    font-weight: 600;
+    color: #00B0FF;
+    min-width: 80px;
+}
+
+.employee-order-name {
+    font-size: 16px;
+    color: #333;
+}
+
+.btn-reset {
+    background: #FF9800;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-reset:hover {
+    background: #F57C00;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .employee-order-modal-content {
+        max-width: 95vw;
+        width: 95vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .shift-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .shift-month-nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .employee-order-modal-content {
+        max-width: 95vw;
+        width: 95vw;
+    }
+    
+    .employee-order-list {
+        gap: 10px;
+    }
+    
+    .employee-order-item {
+        padding: 12px 15px;
+    }
+    
+    .employee-order-info {
+        gap: 10px;
+    }
+    
+    .employee-order-number {
+        min-width: 30px;
+        font-size: 16px;
+    }
+    
+    .employee-order-id {
+        min-width: 70px;
+        font-size: 14px;
+    }
+    
+    .employee-order-name {
+        font-size: 14px;
+    }
+}
+
