@@ -76,6 +76,8 @@ const STORAGE_KEYS = {
     EMPLOYEES: 'kintaikun_demo_employees',
     ATTENDANCE: 'kintaikun_demo_attendance',
     BREAKS: 'kintaikun_demo_breaks',
+    SHIFTS: 'kintaikun_demo_shifts',
+    EMPLOYEE_ORDER: 'kintaikun_demo_employee_order',
     INITIALIZED: 'kintaikun_demo_initialized'
 };
 
@@ -84,6 +86,8 @@ function initializeDemoData() {
         localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(INITIAL_EMPLOYEES));
         localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify(generateSampleAttendance()));
         localStorage.setItem(STORAGE_KEYS.BREAKS, JSON.stringify([]));
+        localStorage.setItem(STORAGE_KEYS.SHIFTS, JSON.stringify(generateSampleShifts()));
+        localStorage.setItem(STORAGE_KEYS.EMPLOYEE_ORDER, JSON.stringify({}));
         localStorage.setItem(STORAGE_KEYS.INITIALIZED, 'true');
         console.log('📦 デモデータを初期化しました');
     }
@@ -110,8 +114,73 @@ function resetDemoData() {
     localStorage.removeItem(STORAGE_KEYS.EMPLOYEES);
     localStorage.removeItem(STORAGE_KEYS.ATTENDANCE);
     localStorage.removeItem(STORAGE_KEYS.BREAKS);
+    localStorage.removeItem(STORAGE_KEYS.SHIFTS);
+    localStorage.removeItem(STORAGE_KEYS.EMPLOYEE_ORDER);
     initializeDemoData();
     console.log('🔄 デモデータをリセットしました');
+}
+
+// ============================================
+// シフトデータ操作
+// ============================================
+function getShifts() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.SHIFTS) || '{}');
+}
+
+function setShifts(shifts) {
+    localStorage.setItem(STORAGE_KEYS.SHIFTS, JSON.stringify(shifts));
+}
+
+function getEmployeeOrder() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.EMPLOYEE_ORDER) || '{}');
+}
+
+function setEmployeeOrder(order) {
+    localStorage.setItem(STORAGE_KEYS.EMPLOYEE_ORDER, JSON.stringify(order));
+}
+
+// サンプルシフトデータを生成
+function generateSampleShifts() {
+    const shifts = {};
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const daysInMonth = new Date(year, month, 0).getDate();
+    
+    const shiftPatterns = [
+        { start: '09:00', end: '17:00' },
+        { start: '10:00', end: '18:00' },
+        { start: '11:00', end: '19:00' },
+        { start: '17:00', end: '22:00' },
+        { start: '18:00', end: '23:00' }
+    ];
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const date = new Date(year, month - 1, day);
+        
+        INITIAL_EMPLOYEES.forEach(emp => {
+            // 70%の確率で出勤
+            if (Math.random() > 0.3) {
+                const pattern = shiftPatterns[Math.floor(Math.random() * shiftPatterns.length)];
+                
+                if (!shifts[dateStr]) {
+                    shifts[dateStr] = {};
+                }
+                
+                shifts[dateStr][emp.employee_id] = {
+                    employee_id: emp.employee_id,
+                    shift_date: dateStr,
+                    is_working: 1,
+                    start_time: pattern.start,
+                    end_time: pattern.end,
+                    note: null
+                };
+            }
+        });
+    }
+    
+    return shifts;
 }
 
 // ============================================
@@ -560,6 +629,210 @@ async function apiDeleteHelpAttendance(employeeId, workDate) {
 }
 
 // ============================================
+// シフト関連API（fetchインターセプト用）
+// ============================================
+
+// シフトデータ取得
+async function handleGetShifts(year, month, storeId, prefix) {
+    await simulateDelay();
+    
+    const employees = getEmployees();
+    const shifts = getShifts();
+    
+    // 従業員をフィルタリング
+    let filteredEmployees = employees;
+    if (prefix) {
+        filteredEmployees = employees.filter(e => e.employee_id.startsWith(prefix));
+    } else if (storeId) {
+        filteredEmployees = employees.filter(e => e.store_id === storeId);
+    }
+    
+    // 従業員データを整形
+    const employeeData = filteredEmployees.map(e => ({
+        employee_id: e.employee_id,
+        name: e.employee_name
+    }));
+    
+    // 指定月のシフトをフィルタリング
+    const monthPrefix = `${year}-${String(month).padStart(2, '0')}`;
+    const filteredShifts = {};
+    
+    Object.keys(shifts).forEach(dateStr => {
+        if (dateStr.startsWith(monthPrefix)) {
+            filteredShifts[dateStr] = {};
+            Object.keys(shifts[dateStr]).forEach(empId => {
+                // 対象の従業員のシフトのみ
+                if (filteredEmployees.some(e => e.employee_id === empId)) {
+                    filteredShifts[dateStr][empId] = shifts[dateStr][empId];
+                }
+            });
+        }
+    });
+    
+    return {
+        success: true,
+        data: {
+            employees: employeeData,
+            shifts: filteredShifts
+        }
+    };
+}
+
+// シフト保存
+async function handleSaveShift(data) {
+    await simulateDelay();
+    
+    const shifts = getShifts();
+    const dateStr = data.shift_date;
+    const empId = data.employee_id;
+    
+    if (!shifts[dateStr]) {
+        shifts[dateStr] = {};
+    }
+    
+    shifts[dateStr][empId] = {
+        employee_id: empId,
+        shift_date: dateStr,
+        is_working: data.is_working,
+        start_time: data.start_time,
+        end_time: data.end_time,
+        note: data.note
+    };
+    
+    setShifts(shifts);
+    
+    return {
+        success: true,
+        message: 'シフトを保存しました'
+    };
+}
+
+// シフト削除
+async function handleDeleteShift(data) {
+    await simulateDelay();
+    
+    const shifts = getShifts();
+    const dateStr = data.shift_date;
+    const empId = data.employee_id;
+    
+    if (shifts[dateStr] && shifts[dateStr][empId]) {
+        delete shifts[dateStr][empId];
+        setShifts(shifts);
+    }
+    
+    return {
+        success: true,
+        message: 'シフトを削除しました'
+    };
+}
+
+// 従業員並び順取得
+async function handleGetEmployeeOrder(storeKey) {
+    await simulateDelay();
+    
+    const orderData = getEmployeeOrder();
+    
+    return {
+        success: true,
+        data: {
+            order: orderData[storeKey] || []
+        }
+    };
+}
+
+// 従業員並び順保存
+async function handleSaveEmployeeOrder(data) {
+    await simulateDelay();
+    
+    const orderData = getEmployeeOrder();
+    orderData[data.store_key] = data.order;
+    setEmployeeOrder(orderData);
+    
+    return {
+        success: true,
+        message: '並び順を保存しました'
+    };
+}
+
+// ============================================
+// Fetch インターセプター
+// ============================================
+const originalFetch = window.fetch;
+
+window.fetch = async function(url, options = {}) {
+    const urlStr = url.toString();
+    
+    // シフト管理API
+    if (urlStr.includes('api/shift-management.php')) {
+        const method = options.method || 'GET';
+        
+        if (method === 'GET') {
+            // URLパラメータを解析
+            const urlObj = new URL(urlStr, window.location.origin);
+            const year = parseInt(urlObj.searchParams.get('year')) || new Date().getFullYear();
+            const month = parseInt(urlObj.searchParams.get('month')) || new Date().getMonth() + 1;
+            const storeId = urlObj.searchParams.get('store_id');
+            const prefix = urlObj.searchParams.get('prefix');
+            
+            const result = await handleGetShifts(year, month, storeId, prefix);
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        } else if (method === 'POST') {
+            const data = JSON.parse(options.body);
+            const result = await handleSaveShift(data);
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        } else if (method === 'DELETE') {
+            const data = JSON.parse(options.body);
+            const result = await handleDeleteShift(data);
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+    }
+    
+    // 従業員並び順API
+    if (urlStr.includes('api/employee-order.php')) {
+        const method = options.method || 'GET';
+        
+        if (method === 'GET') {
+            const urlObj = new URL(urlStr, window.location.origin);
+            const storeKey = urlObj.searchParams.get('store_key') || 'default';
+            
+            const result = await handleGetEmployeeOrder(storeKey);
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        } else if (method === 'POST') {
+            const data = JSON.parse(options.body);
+            const result = await handleSaveEmployeeOrder(data);
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+    }
+    
+    // その他のAPIはモックレスポンスを返す（エラー防止）
+    if (urlStr.includes('api/')) {
+        console.warn('未実装のAPI:', urlStr);
+        return new Response(JSON.stringify({ success: false, error: 'API not implemented in demo mode' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+    
+    // API以外は通常のfetchを実行
+    return originalFetch.apply(this, arguments);
+};
+
+// ============================================
 // ユーティリティ
 // ============================================
 function simulateDelay(ms = 100) {
@@ -573,4 +846,5 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('📋 ログイン情報:');
     console.log('   店舗用: ID=demo, PW=demo1234');
     console.log('   管理者: ID=admin, PW=admin1234');
+    console.log('📅 シフト機能も利用可能です');
 });
